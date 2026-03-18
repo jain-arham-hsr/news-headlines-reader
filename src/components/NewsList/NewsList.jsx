@@ -1,5 +1,5 @@
 import { CATEGORIES } from "../../constants/categories";
-// import { FeaturedCard } from "../FeaturedCard/FeaturedCard";
+import FeaturedCard from "../FeaturedCard/FeaturedCard";
 import NewsItem from "../NewsItem/NewsItem";
 
 export default function NewsList({
@@ -16,7 +16,16 @@ export default function NewsList({
 
   return (
     <>
-      {/* <FeaturedCard /> */}
+      <FeaturedCard
+        loading={loading}
+        error={error}
+        articles={articles}
+        readUrls={readUrls}
+        expandedId={expandedId}
+        setExpandedId={setExpandedId}
+        markAsRead={markAsRead}
+        accent={accent}
+      />
       {!loading &&
         !error &&
         articles.slice(1).map((a) => {

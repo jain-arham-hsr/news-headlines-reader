@@ -79,6 +79,7 @@ function App() {
         expandedId={expandedId}
         setExpandedId={setExpandedId}
         articles={articles}
+        load={load}
       />
     </div>
   );

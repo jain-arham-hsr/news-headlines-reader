@@ -93,6 +93,7 @@
   border-radius: 10px;
   background: var(--theme-surface2);
   border: 1px solid var(--theme-border);
+  color: var(--theme-text);
   cursor: pointer;
   font-size: 14px;
   display: flex;

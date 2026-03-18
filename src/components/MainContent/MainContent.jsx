@@ -10,6 +10,7 @@ export default function MainContent({
   error,
   articles,
   expandedId,
+  load,
   setExpandedId,
 }) {
   const catInfo = CATEGORIES[selectedCat];
@@ -50,29 +51,29 @@ export default function MainContent({
         </div>
 
         {/* Progress bar */}
-        {/* {!loading && totalCount > 0 && (
+        {!loading && totalCount > 0 && (
           <div className={styles.progressBarTrack}>
             <div
               className={styles.progressBarFill}
-              style={{ width: `${pct}%`, background: accent }}
+              style={{ width: `${pct}%`, background: catInfo.color }}
             />
           </div>
-        )} */}
+        )}
 
         {/* Error */}
-        {/* {error && (
+        {error && (
           <div className={styles.errorContainer}>
             <div className={styles.errorIcon}>⚠</div>
             <p className={styles.errorMessage}>{error}</p>
             <button
               onClick={() => load(selectedCat)}
               className={styles.retryButton}
-              style={{ background: accent }}
+              style={{ background: catInfo.color }}
             >
               Try again
             </button>
           </div>
-        )} */}
+        )}
 
         {/* Skeleton */}
         {/* {loading &&

@@ -1,154 +1,97 @@
-import React from "react";
+import React, { useState } from "react";
+import { getFaviconUrl } from "../../services/faviconService";
+import styles from "./NewsItem.module.css";
+
+function SourceBadge({ name, accent, url }) {
+  const [failed, setFailed] = useState(false);
+  const initials = name
+    .split(" ")
+    .map((w) => w[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+  const faviconUrl = !failed ? getFaviconUrl(url) : null;
+
+  return (
+    <div>
+      {faviconUrl ? (
+        <img
+          src={faviconUrl}
+          alt={name}
+          width={16}
+          height={16}
+          style={{ display: "block" }}
+          onError={() => setFailed(true)}
+        />
+      ) : (
+        <span style={{ fontSize: 9, fontWeight: 700, color: accent }}>
+          {initials}
+        </span>
+      )}
+    </div>
+  );
+}
 
 export default function NewsItem({
   id,
   title,
   description,
-  thumbnailImage,
+  thumbnail,
   source,
   url,
   publishedAt,
-  T,
   accent,
   isRead,
-  isExp,
-  setExpandedId,
   markAsRead,
+  isExpanded,
+  setExpandedId,
 }) {
   return (
     <div
       key={id}
-      onClick={() => setExpandedId((id) => (id === id ? null : id))}
-      style={{
-        padding: "14px 0",
-        borderBottom: `1px solid ${T.border}`,
-        cursor: "pointer",
-        opacity: isRead && !isExp ? 0.45 : 1,
-        transition: "opacity 0.2s",
-      }}
+      onClick={() => setExpandedId((currId) => (currId === id ? null : id))}
+      className={styles.newsItem}
+      data-read={isRead}
+      data-expanded={isExpanded}
     >
-      <div style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
-        <div style={{ flex: 1, minWidth: 0 }}>
+      <div className={styles.layout}>
+        <div className={styles.content}>
           {/* Source row */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 6,
-              marginBottom: 6,
-            }}
-          >
-            {/* <SourceBadge name={a.source} accent={accent} /> */}
+          <div className={styles.sourceRow}>
             <SourceBadge name={source} accent={accent} url={url} />
-            <span
-              style={{
-                fontSize: 12,
-                color: T.textMuted,
-                fontWeight: 500,
-              }}
-            >
-              {source}
-            </span>
-            <span
-              style={{
-                color: T.textMuted,
-                fontSize: 10,
-                margin: "0 1px",
-              }}
-            >
-              ·
-            </span>
-            <span style={{ fontSize: 12, color: T.textMuted }}>
-              {publishedAt}
-            </span>
-            {isRead && (
-              <span
-                style={{
-                  marginLeft: "auto",
-                  fontSize: 11,
-                  color: "#22c55e",
-                  fontWeight: 600,
-                }}
-              >
-                ✓
-              </span>
-            )}
+            <span className={styles.sourceName}>{source}</span>
+            <span className={styles.dot}>·</span>
+            <span className={styles.publishedAt}>{publishedAt}</span>
+            {isRead && <span className={styles.readCheck}>✓</span>}
           </div>
+
           {/* Title */}
-          <h3
-            style={{
-              margin: 0,
-              fontSize: 15,
-              fontWeight: 700,
-              lineHeight: 1.4,
-              color: isRead ? T.textMuted : T.text,
-              textDecoration: isRead ? "line-through" : "none",
-              textDecorationColor: T.textMuted,
-              letterSpacing: "-0.15px",
-            }}
-          >
+          <h3 className={`${styles.title} ${isRead ? styles.titleRead : ""}`}>
             {title}
           </h3>
+
           {/* Expanded */}
-          {isExp && (
-            <div style={{ marginTop: 10 }}>
-              <p
-                style={{
-                  margin: "0 0 10px",
-                  fontSize: 13,
-                  color: T.textSub,
-                  lineHeight: 1.65,
-                }}
-              >
-                {description}
-              </p>
-              <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+          {isExpanded && (
+            <div className={styles.expanded}>
+              <p className={styles.description}>{description}</p>
+              <div className={styles.actions}>
                 {!isRead && (
                   <button
                     onClick={(e) => markAsRead(e, id)}
-                    style={{
-                      padding: "6px 13px",
-                      background: accent,
-                      border: "none",
-                      borderRadius: 7,
-                      color: "#fff",
-                      cursor: "pointer",
-                      fontSize: 12,
-                      fontFamily: "inherit",
-                      fontWeight: 600,
-                    }}
+                    className={styles.markReadBtn}
+                    style={{ background: accent }}
                   >
                     ✓ Mark as read
                   </button>
                 )}
-                {isRead && (
-                  <span
-                    style={{
-                      fontSize: 12,
-                      color: "#22c55e",
-                      fontWeight: 600,
-                      padding: "6px 0",
-                    }}
-                  >
-                    ✓ Read
-                  </span>
-                )}
+                {isRead && <span className={styles.readLabel}>✓ Read</span>}
                 {url && (
                   <a
                     href={url}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
-                    style={{
-                      padding: "6px 13px",
-                      background: T.surface2,
-                      border: `1px solid ${T.border}`,
-                      borderRadius: 7,
-                      color: T.textSub,
-                      fontSize: 12,
-                      fontFamily: "inherit",
-                      textDecoration: "none",
-                    }}
+                    className={styles.fullStoryLink}
                   >
                     Full story →
                   </a>
@@ -157,32 +100,20 @@ export default function NewsItem({
             </div>
           )}
         </div>
+
         {/* Thumbnail */}
-        {thumbnailImage ? (
+        {thumbnail ? (
           <img
-            src={thumbnailImage}
+            src={thumbnail}
             alt=""
-            style={{
-              width: 78,
-              height: 78,
-              borderRadius: 10,
-              objectFit: "cover",
-              flexShrink: 0,
-            }}
+            className={styles.thumbnail}
             onError={(e) => (e.target.style.display = "none")}
           />
         ) : (
           <div
+            className={styles.placeholderThumb}
             style={{
-              width: 78,
-              height: 78,
-              borderRadius: 10,
-              flexShrink: 0,
               background: accent + "10",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: 20,
               color: accent + "50",
             }}
           >

@@ -1,0 +1,44 @@
+:root {
+  --theme-bg: #f5f5f7;
+  --theme-surface: #ffffff;
+  --theme-surface2: #f0f0f4;
+  --theme-border: #e5e5eb;
+  --theme-text: #0d0d14;
+  --theme-text-sub: #66667a;
+  --theme-text-muted: #aaaab8;
+  --theme-card: #ffffff;
+}
+
+[data-theme="dark"] {
+  --theme-bg: #0d0d12;
+  --theme-surface: #17171f;
+  --theme-surface2: #1f1f2a;
+  --theme-border: #24242f;
+  --theme-text: #ededf5;
+  --theme-text-sub: #9090aa;
+  --theme-text-muted: #50505e;
+  --theme-card: #1a1a24;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--theme-bg);
+}
+
+@keyframes shimmer {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+::-webkit-scrollbar {
+  display: none;
+}

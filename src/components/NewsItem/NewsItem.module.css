@@ -6,7 +6,7 @@
   transition: opacity 0.2s;
 }
 
-.newsItem[data-read="true"]:not([data-expanded="true"]) {
+.newsItem[data-read="true"] {
   opacity: 0.45;
 }
 

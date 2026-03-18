@@ -77,7 +77,7 @@ export default function NewsItem({
               <div className={styles.actions}>
                 {!isRead && (
                   <button
-                    onClick={(e) => markAsRead(e, id)}
+                    onClick={(e) => markAsRead(e, url)}
                     className={styles.markReadBtn}
                     style={{ background: accent }}
                   >

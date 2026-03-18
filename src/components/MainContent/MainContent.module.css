@@ -3,3 +3,138 @@
   margin: 0 auto;
   padding: 0 16px 100px;
 }
+
+/* Section header row */
+.sectionHeader {
+  padding: 18px 0 12px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.sectionHeaderLeft {
+  /* left column: title + subtitle */
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--text);
+}
+
+.sectionSubtitle {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Completion percentage */
+.completionBlock {
+  text-align: right;
+}
+
+.completionPct {
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1;
+  /* color is set inline via catInfo.color — keep as inline style */
+}
+
+.completionLabel {
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
+
+/* Progress bar (currently commented-out, included for completeness) */
+.progressBarTrack {
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.progressBarFill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.4s ease;
+  /* width and background are set dynamically via inline style */
+}
+
+/* Error state */
+.errorContainer {
+  margin-top: 60px;
+  text-align: center;
+}
+
+.errorIcon {
+  font-size: 40px;
+  margin-bottom: 12px;
+  opacity: 0.3;
+}
+
+.errorMessage {
+  color: var(--text-sub);
+  font-size: 15px;
+  margin-bottom: 16px;
+}
+
+.retryButton {
+  padding: 9px 22px;
+  border: none;
+  border-radius: 9px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: inherit;
+  font-weight: 600;
+  /* background (accent color) is set dynamically via inline style */
+}
+
+/* Skeleton loading cards */
+.skeletonCard {
+  padding: 15px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.skeletonBody {
+  flex: 1;
+}
+
+.skeletonLineSource {
+  height: 9px;
+  width: 28%;
+  background: var(--surface-2);
+  border-radius: 4px;
+  margin-bottom: 10px;
+  animation: shimmer 1.4s ease infinite;
+}
+
+.skeletonLineTitleFull {
+  height: 14px;
+  width: 100%;
+  background: var(--surface-2);
+  border-radius: 4px;
+  margin-bottom: 7px;
+}
+
+.skeletonLineTitlePartial {
+  height: 14px;
+  width: 65%;
+  background: var(--surface-2);
+  border-radius: 4px;
+}
+
+.skeletonThumb {
+  width: 76px;
+  height: 76px;
+  border-radius: 10px;
+  background: var(--surface-2);
+  flex-shrink: 0;
+}

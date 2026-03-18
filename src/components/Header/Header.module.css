@@ -1,0 +1,134 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: var(--theme-surface);
+  border-bottom: 1px solid var(--theme-border);
+}
+
+.topBar {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 16px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.logoIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.3s;
+}
+
+.logoName {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  line-height: 1.1;
+  color: var(--theme-text);
+}
+
+.logoDate {
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  color: var(--theme-textMuted);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.readPill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--theme-surface2);
+  border: 1px solid var(--theme-border);
+  border-radius: 20px;
+  padding: 5px 11px 5px 9px;
+}
+
+.readDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--theme-textMuted);
+  transition: background 0.3s;
+}
+
+.readText {
+  font-size: 12px;
+  color: var(--theme-textSub);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.readCount {
+  color: var(--theme-text);
+  font-weight: 600;
+}
+
+.readTotal {
+  color: var(--theme-textMuted);
+}
+
+.themeToggle {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--theme-surface2);
+  border: 1px solid var(--theme-border);
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tabs {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 16px;
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.tab {
+  padding: 9px 14px;
+  border: none;
+  border-bottom: 2.5px solid transparent;
+  background: none;
+  color: var(--theme-textSub);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 400;
+  font-family: inherit;
+  white-space: nowrap;
+  margin-bottom: -1px;
+  transition: all 0.15s;
+}
+
+.tabActive {
+  font-weight: 700;
+}

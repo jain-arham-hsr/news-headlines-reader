@@ -1,32 +1,18 @@
-import { useState, useEffect } from "react";
 import { CATEGORIES } from "../../constants/categories";
 // import { FeaturedCard } from "../FeaturedCard/FeaturedCard";
 import NewsItem from "../NewsItem/NewsItem";
-import { getTopHeadlines } from "../../services/newsService";
 
-export default function NewsList({ selectedCat, readIds }) {
+export default function NewsList({
+  selectedCat,
+  readUrls,
+  loading,
+  error,
+  articles,
+  expandedId,
+  setExpandedId,
+  markAsRead,
+}) {
   const accent = CATEGORIES[selectedCat].color;
-  const [articles, setArticles] = useState([]);
-  const [expandedId, setExpandedId] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  async function load(cat) {
-    setLoading(true);
-    setError(null);
-    setExpandedId(null);
-    try {
-      setArticles(await getTopHeadlines(cat));
-    } catch (e) {
-      setError(e.message);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  useEffect(() => {
-    load(selectedCat);
-  }, [selectedCat]);
 
   return (
     <>
@@ -34,7 +20,7 @@ export default function NewsList({ selectedCat, readIds }) {
       {!loading &&
         !error &&
         articles.slice(1).map((a) => {
-          const isRead = readIds.has(a.id);
+          const isRead = readUrls.has(a.url);
           const isExp = expandedId === a.id;
           return (
             <NewsItem
@@ -49,6 +35,7 @@ export default function NewsList({ selectedCat, readIds }) {
               isRead={isRead}
               isExpanded={isExp}
               setExpandedId={setExpandedId}
+              markAsRead={markAsRead}
             />
           );
         })}

@@ -9,7 +9,6 @@ export const getTopHeadlines = async (
   country = "us",
 ) => {
   try {
-    // Fix: Use simple string concatenation to avoid the URL() stripping bug
     let targetUrl = `${BASE_URL}/top-headlines?lang=en&country=${country}&max=20&apikey=${import.meta.env.VITE_GNEWS_API_KEY}`;
 
     if (categoryId !== "all") {

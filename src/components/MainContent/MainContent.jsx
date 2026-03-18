@@ -28,16 +28,14 @@ export default function MainContent({
     <>
       <main className={styles.mainContent}>
         {/* Section header + progress */}
-        <div className={styles.sectionHeader}>
-          <div className={styles.sectionHeaderLeft}>
-            <h1 className={styles.sectionTitle}>{catInfo?.label}</h1>
-            {!loading && !error && (
+        {!loading && !error && (
+          <div className={styles.sectionHeader}>
+            <div className={styles.sectionHeaderLeft}>
+              <h1 className={styles.sectionTitle}>{catInfo?.label}</h1>
               <p className={styles.sectionSubtitle}>
                 {totalCount} stories · {readCount} read
               </p>
-            )}
-          </div>
-          {!loading && !error && pct > 0 && (
+            </div>
             <div className={styles.completionBlock}>
               <div
                 className={styles.completionPct}
@@ -47,11 +45,11 @@ export default function MainContent({
               </div>
               <div className={styles.completionLabel}>complete</div>
             </div>
-          )}
-        </div>
+          </div>
+        )}
 
         {/* Progress bar */}
-        {!loading && totalCount > 0 && (
+        {!loading && !error && totalCount > 0 && (
           <div className={styles.progressBarTrack}>
             <div
               className={styles.progressBarFill}
@@ -76,7 +74,7 @@ export default function MainContent({
         )}
 
         {/* Skeleton */}
-        {/* {loading &&
+        {loading &&
           Array.from({ length: 7 }).map((_, i) => (
             <div key={i} className={styles.skeletonCard}>
               <div className={styles.skeletonBody}>
@@ -86,7 +84,7 @@ export default function MainContent({
               </div>
               <div className={styles.skeletonThumb} />
             </div>
-          ))} */}
+          ))}
 
         <NewsList
           selectedCat={selectedCat}
